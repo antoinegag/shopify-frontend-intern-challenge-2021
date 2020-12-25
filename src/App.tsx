@@ -1,13 +1,14 @@
 import React from "react";
-import Test from "./components/Test";
+import Header from "./components/Header";
+import SearchBox from "./components/SearchBox";
 
 import "./style/common.scss";
 
 function App() {
   return (
     <div>
-      <Test />
-      Hello, world!
+      <Header />
+      <SearchBox />
     </div>
   );
 }
