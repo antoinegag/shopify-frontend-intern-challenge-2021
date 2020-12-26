@@ -67,6 +67,20 @@ function App() {
         <main>
           <div className={styles.searchbox_container}>
             <SearchBox onQueryChange={debounce(handleQueryChange, 400)} />
+            {results?.Response === "True" && (
+              <Pager
+                currentPage={page}
+                onPrevious={() => {
+                  setPage(page - 1);
+                  window.scrollTo(0, 0);
+                }}
+                onNext={() => {
+                  setPage(page + 1);
+                  window.scrollTo(0, 0);
+                }}
+                pageCount={parseInt(results.totalResults) / 10}
+              />
+            )}
           </div>
           {results?.Response === "True" && (
             <div>

@@ -33,7 +33,6 @@ main {
   top: 0;
   align-self: start;
   background: white;
-  padding-bottom: 1em;
 }
 
 aside {
@@ -42,6 +41,7 @@ aside {
   top: 0;
   align-self: start;
   flex: 25%;
+  padding-bottom: 1em;
 
   h1 {
     text-decoration: underline wavy $yellow;

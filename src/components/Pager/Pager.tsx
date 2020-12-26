@@ -22,7 +22,10 @@ const Pager: React.FC<PagerProps> = ({
       <button onClick={onPrevious} disabled={currentPage === 1}>
         Prev
       </button>
-      <div>{currentPage}</div>
+      <div className={styles.page_number}>
+        <span className={styles.current}>{currentPage}</span>
+        <span className={styles.count}>/{pageCount}</span>
+      </div>
       <button onClick={onNext} disabled={currentPage === pageCount}>
         Next
       </button>
