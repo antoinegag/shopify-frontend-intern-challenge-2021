@@ -8,7 +8,7 @@ interface SearchBoxProps {
 const SearchBox: React.FC<SearchBoxProps> = ({ onQueryChange }) => {
   return (
     <div className={styles.container}>
-      <div className={styles.title}>Search by Title</div>
+      <h1 className={styles.title}>Search a movie to nominate</h1>
       <input
         className={styles.searchbar}
         placeholder="The Empire Strikes Back, The Matrix..."

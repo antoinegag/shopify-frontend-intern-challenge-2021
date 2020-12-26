@@ -2,11 +2,9 @@ import React from "react";
 
 import styles from "./Banner.module.scss";
 
-interface InfoBoxProps {
-  dismissible?: boolean;
-}
+interface BannerProps {}
 
-const InfoBox: React.FC<InfoBoxProps> = ({ dismissible = true }) => {
+const Banner: React.FC<BannerProps> = () => {
   return (
     <div>
       <div className={styles.container}>
@@ -15,11 +13,10 @@ const InfoBox: React.FC<InfoBoxProps> = ({ dismissible = true }) => {
             <div className={styles.title}>You nominated 5 movies</div>
             <div>this is some random text</div>
           </div>
-          <div className={styles.close}>Close</div>
         </div>
       </div>
     </div>
   );
 };
 
-export default InfoBox;
+export default Banner;

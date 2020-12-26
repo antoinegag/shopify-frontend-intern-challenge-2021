@@ -1,8 +1,8 @@
 .container {
-  display: flex;
-  justify-content: center;
-  align-content: center;
   padding: 4em 4em 4em 4em;
+  position: sticky;
+  top: 0;
+  align-self: start;
 }
 
 .content {
