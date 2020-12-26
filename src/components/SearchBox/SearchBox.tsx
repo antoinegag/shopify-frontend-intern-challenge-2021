@@ -1,19 +1,22 @@
-import React, { useState } from "react";
-import debounce from "lodash.debounce";
+import React from "react";
 
-interface SearchBarProps {
-  onChange?: () => void;
-  placeholder?: string;
+import styles from "./SearchBox.module.scss";
+interface SearchBoxProps {
+  onQueryChange?: (query: string) => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onChange, placeholder }) => {
-  const [query, setQuery] = useState();
-
+const SearchBox: React.FC<SearchBoxProps> = ({ onQueryChange }) => {
   return (
-    <div>
-      <input placeholder={placeholder} />
+    <div className={styles.container}>
+      <div className={styles.title}>Search by Title</div>
+      <input
+        className={styles.searchbar}
+        placeholder="The Empire Strikes Back, The Matrix..."
+        onChange={(e) => onQueryChange && onQueryChange(e.target.value)}
+        type="text"
+      />
     </div>
   );
 };
 
-export default SearchBar;
+export default SearchBox;

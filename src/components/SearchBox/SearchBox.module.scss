@@ -1,0 +1,40 @@
+@import "src/style/variables";
+@import "src/style/colors";
+
+.container {
+  display: flex;
+  //   justify-content: center;
+  //   align-content: center;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-size: 1.5em;
+  //   text-align: center;
+  width: 100%;
+  margin-bottom: 0.5em;
+}
+
+.searchbar {
+  padding: 10px 10px 10px 10px;
+  border-radius: 4px;
+
+  @media (max-width: $md) {
+    flex-grow: 1;
+  }
+
+  @media (min-width: $md) {
+    min-width: 300px;
+  }
+
+  @media (min-width: $lg) {
+    min-width: 400px;
+  }
+
+  border: 2px solid gray;
+
+  &:focus {
+    outline: none;
+    border: 2px solid $green-dark;
+  }
+}

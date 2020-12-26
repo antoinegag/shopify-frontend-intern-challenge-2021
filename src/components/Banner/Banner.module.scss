@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 4em 4em 4em 4em;
+}
+
+.content {
+  text-align: center;
+}
+
+.title {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+.info {
+  margin-bottom: 2em;
+}
+
+.close {
+  text-decoration: underline;
+  &:hover {
+    cursor: pointer;
+  }
+}
