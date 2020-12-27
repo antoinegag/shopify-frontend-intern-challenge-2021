@@ -4,14 +4,16 @@ import SearchBox from "./components/SearchBox";
 import debounce from "lodash.debounce";
 import "./style/common.scss";
 import styles from "./App.module.scss";
-import Banner from "./components/Banner/Banner";
+import DoneNotice from "./components/DoneNotice/DoneNotice";
 import { OMDBMovieSearchResult, search, SearchResult } from "./api/OMDBClient";
 import MovieCard from "./components/MovieCard";
 import NominatedMovieEntry from "./components/NominatedMovieEntry";
 import Pager from "./components/Pager";
+import SearchBlankState from "./components/SearchBlankState";
+import NominationBlankState from "./components/NominationsBlankState";
 
 function App() {
-  const [results, setResults] = useState<SearchResult>();
+  const [results, setResults] = useState<SearchResult | undefined>();
   const [nominated, setNominated] = useState<OMDBMovieSearchResult[]>([]);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
@@ -37,7 +39,6 @@ function App() {
     setQuery(query);
   };
 
-  // TODO: Extract that logic to a hook or context
   const handleNominate = (movie: OMDBMovieSearchResult) => {
     if (
       nominated.length >= 5 || // Finished
@@ -46,7 +47,13 @@ function App() {
       return;
     }
 
-    setNominated([...nominated, movie]);
+    const newNominated = [...nominated, movie];
+    setNominated(newNominated);
+
+    if (newNominated.length === 5) {
+      setQuery("");
+      setResults(undefined);
+    }
   };
 
   const handleRemoveNomination = (movie: OMDBMovieSearchResult) => {
@@ -59,69 +66,76 @@ function App() {
     }
   };
 
+  const renderSearch = () => {
+    return (
+      <>
+        <div className={styles.searchbox_container}>
+          <SearchBox onQueryChange={debounce(handleQueryChange, 400)} />
+          {query === "" && <SearchBlankState />}
+          {results?.Response === "True" && (
+            <Pager
+              currentPage={page}
+              onPrevious={() => {
+                setPage(page - 1);
+                window.scrollTo(0, 0);
+              }}
+              onNext={() => {
+                setPage(page + 1);
+                window.scrollTo(0, 0);
+              }}
+              pageCount={Math.ceil(parseInt(results.totalResults) / 10)}
+            />
+          )}
+        </div>
+        {results?.Response === "True" && (
+          <div>
+            <div>
+              {results.Search.map((movie) => (
+                <MovieCard
+                  {...movie}
+                  onNominate={handleNominate}
+                  onRemoveNomination={handleRemoveNomination}
+                  nominated={
+                    nominated.findIndex((m) => m.imdbID === movie.imdbID) !== -1
+                  }
+                />
+              ))}
+            </div>
+            <Pager
+              currentPage={page}
+              onPrevious={() => {
+                setPage(page - 1);
+                window.scrollTo(0, 0);
+              }}
+              onNext={() => {
+                setPage(page + 1);
+                window.scrollTo(0, 0);
+              }}
+              pageCount={Math.ceil(parseInt(results.totalResults) / 10)}
+            />
+          </div>
+        )}
+      </>
+    );
+  };
+
   return (
     <div>
       <Header />
-      {nominated.length === 5 && <Banner />}
       <div className={styles.body}>
-        <main>
-          <div className={styles.searchbox_container}>
-            <SearchBox onQueryChange={debounce(handleQueryChange, 400)} />
-            {results?.Response === "True" && (
-              <Pager
-                currentPage={page}
-                onPrevious={() => {
-                  setPage(page - 1);
-                  window.scrollTo(0, 0);
-                }}
-                onNext={() => {
-                  setPage(page + 1);
-                  window.scrollTo(0, 0);
-                }}
-                pageCount={parseInt(results.totalResults) / 10}
-              />
-            )}
-          </div>
-          {results?.Response === "True" && (
-            <div>
-              <div>
-                {results.Search.map((movie) => (
-                  <MovieCard
-                    {...movie}
-                    onNominate={handleNominate}
-                    onRemoveNomination={handleRemoveNomination}
-                    nominated={
-                      nominated.findIndex((m) => m.imdbID === movie.imdbID) !==
-                      -1
-                    }
-                  />
-                ))}
-              </div>
-              <Pager
-                currentPage={page}
-                onPrevious={() => {
-                  setPage(page - 1);
-                  window.scrollTo(0, 0);
-                }}
-                onNext={() => {
-                  setPage(page + 1);
-                  window.scrollTo(0, 0);
-                }}
-                pageCount={parseInt(results.totalResults) / 10}
-              />
-            </div>
-          )}
-        </main>
+        <main>{nominated.length < 5 ? renderSearch() : <DoneNotice />}</main>
         <aside>
           <h1>Nominations</h1>
-          {nominated.map((movie) => (
-            <NominatedMovieEntry
-              {...movie}
-              onRemoveNomination={handleRemoveNomination}
-            />
-          ))}
-          {/* <div>Start nominating movies and they'll show up here!</div> */}
-          {/* https://www.drawkit.io/ */}
+          {nominated.length > 0 ? (
+            nominated.map((movie) => (
+              <NominatedMovieEntry
+                {...movie}
+                onRemoveNomination={handleRemoveNomination}
+              />
+            ))
+          ) : (
+            <NominationBlankState />
+          )}
         </aside>
       </div>
     </div>

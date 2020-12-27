@@ -3,9 +3,8 @@
 
 .container {
   display: flex;
-  //   justify-content: center;
-  //   align-content: center;
   flex-wrap: wrap;
+  padding: 0 0 0.5em 0;
 }
 
 .title {
@@ -13,7 +12,7 @@
 }
 
 .searchbar {
-  padding: 10px 10px 10px 10px;
+  padding: 10px 10px;
   border-radius: 4px;
 
   font-size: 1.1em;
