@@ -38,4 +38,8 @@
   align-items: center;
   justify-content: flex-end;
   flex-grow: 1;
+
+  .remove_icon {
+    cursor: pointer;
+  }
 }

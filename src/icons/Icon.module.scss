@@ -1,0 +1,25 @@
+.size {
+  &-sm {
+    width: 12px;
+  }
+
+  &-md {
+    width: 16px;
+  }
+
+  &-lg {
+    width: 32px;
+  }
+}
+
+.color {
+  &-light {
+    fill: #ffffff;
+    stroke: #ffffff;
+  }
+
+  &-dark {
+    fill: #000000;
+    stroke: #000000;
+  }
+}

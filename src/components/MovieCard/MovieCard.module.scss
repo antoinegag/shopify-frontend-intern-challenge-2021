@@ -35,27 +35,34 @@
     color: black;
   }
 
+  .title_container {
+    margin-bottom: 0.5em;
+  }
+
   .title {
     font-size: 1.2em;
     font-weight: bold;
   }
 
-  .nominated {
+  .nominated_badge {
     display: flex;
-    padding: 0.25em 0.25em 0.25em 0;
+    padding: 0.25em 0.5em;
     align-items: center;
+    justify-items: center;
 
-    div {
-      margin-right: 0.25em;
-      color: white;
-      font-weight: bold;
-      background-color: goldenrod;
-      padding: 0.25em 0.5em 0.25em 0.5em;
-      border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    background-color: goldenrod;
+    border-radius: 10px;
+
+    .remove_icon {
+      cursor: pointer;
+      margin-left: 0.25em;
     }
   }
 
   .controls {
+    display: flex;
     button {
       border-radius: 5px;
       background-color: white;

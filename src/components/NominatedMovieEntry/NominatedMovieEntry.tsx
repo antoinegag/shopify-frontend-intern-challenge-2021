@@ -1,6 +1,6 @@
 import React from "react";
 import { OMDBMovieSearchResult } from "../../api/OMDBClient";
-import XButton from "../XButton";
+import IconClose from "../../icons/IconClose";
 import styles from "./NominatedMovieEntry.module.scss";
 import UnknowPoster from "./UnknownPoster.svg";
 
@@ -36,11 +36,14 @@ const MovieCard: React.FC<MovieCardProps> = ({
       </div>
       <div className={styles.controls}>
         {onRemoveNomination && (
-          <XButton
+          <div
             onClick={() =>
               onRemoveNomination({ Title, Year, imdbID, Type, Poster })
             }
-          />
+            className={styles.remove_icon}
+          >
+            <IconClose color="dark" size="md" />
+          </div>
         )}
       </div>
     </div>
