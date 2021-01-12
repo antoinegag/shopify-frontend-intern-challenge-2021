@@ -1,9 +1,8 @@
 import React from "react";
 import { OMDBMovieSearchResult } from "../../api/OMDBClient";
-import styles from "./MovieCard.module.scss";
-import UnknowPoster from "./UnknownPoster.svg";
-import classNames from "classnames";
 import IconClose from "../../icons/IconClose";
+import styles from "./MovieCard.module.scss";
+import MoviePoster from "../common/MoviePoster/MoviePoster";
 
 interface MovieCardProps extends OMDBMovieSearchResult {
   nominated?: boolean;
@@ -21,18 +20,11 @@ const MovieCard: React.FC<MovieCardProps> = ({
   onNominate,
   onRemoveNomination,
 }) => {
+  const movie: OMDBMovieSearchResult = { Title, Year, imdbID, Type, Poster };
+
   return (
     <div className={styles.container}>
-      {Poster === "N/A" ? (
-        <div className={styles.unknown_poster}>
-          <img src={UnknowPoster} />
-        </div>
-      ) : (
-        <img
-          src={Poster === "N/A" ? UnknowPoster : Poster}
-          className={styles.poster}
-        />
-      )}
+      <MoviePoster src={Poster} />
       <div className={styles.info}>
         <div>
           <div className={styles.title_container}>
@@ -46,15 +38,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
                 {onRemoveNomination && (
                   <div
                     className={styles.remove_icon}
-                    onClick={() =>
-                      onRemoveNomination({
-                        Title,
-                        Year,
-                        imdbID,
-                        Type,
-                        Poster,
-                      })
-                    }
+                    onClick={() => onRemoveNomination(movie)}
                   >
                     <IconClose color="light" />
                   </div>
@@ -64,9 +48,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
             {!nominated && onNominate && (
               <button
                 className={styles.nominate}
-                onClick={() =>
-                  onNominate({ Title, Year, imdbID, Type, Poster })
-                }
+                onClick={() => onNominate(movie)}
               >
                 Nominate
               </button>

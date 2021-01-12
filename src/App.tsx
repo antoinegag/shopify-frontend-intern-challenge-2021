@@ -1,30 +1,34 @@
 import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
-import SearchBox from "./components/SearchBox";
+import SearchInput from "./components/SearchInput";
 import debounce from "lodash.debounce";
 import "./style/common.scss";
 import styles from "./App.module.scss";
 import DoneNotice from "./components/DoneNotice/DoneNotice";
-import { OMDBMovieSearchResult, search, SearchResult } from "./api/OMDBClient";
+import {
+  OMDBMovieSearchResult,
+  searchOMDB,
+  SearchResult,
+} from "./api/OMDBClient";
 import MovieCard from "./components/MovieCard";
 import NominatedMovieEntry from "./components/NominatedMovieEntry";
-import Pager from "./components/Pager";
+import Pager from "./components/common/Pager";
 import SearchBlankState from "./components/SearchBlankState";
 import NominationBlankState from "./components/NominationsBlankState";
 
 function App() {
   const [results, setResults] = useState<SearchResult | undefined>();
   const [nominated, setNominated] = useState<OMDBMovieSearchResult[]>([]);
-  const [page, setPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const [query, setQuery] = useState("");
 
   useEffect(() => {
     async function searchMovies() {
       try {
-        const searchResults = await search({
+        const searchResults = await searchOMDB({
           title: query,
           type: "movie",
-          page: page,
+          page: currentPage,
         });
 
         setResults(searchResults);
@@ -32,10 +36,10 @@ function App() {
     }
 
     searchMovies();
-  }, [query, page]);
+  }, [query, currentPage]);
 
   const handleQueryChange = async (query: string) => {
-    setPage(1);
+    setCurrentPage(1);
     setQuery(query);
   };
 
@@ -70,17 +74,17 @@ function App() {
     return (
       <>
         <div className={styles.searchbox_container}>
-          <SearchBox onQueryChange={debounce(handleQueryChange, 400)} />
+          <SearchInput onQueryChange={debounce(handleQueryChange, 400)} />
           {query === "" && <SearchBlankState />}
           {results?.Response === "True" && (
             <Pager
-              currentPage={page}
+              currentPage={currentPage}
               onPrevious={() => {
-                setPage(page - 1);
+                setCurrentPage(currentPage - 1);
                 window.scrollTo(0, 0);
               }}
               onNext={() => {
-                setPage(page + 1);
+                setCurrentPage(currentPage + 1);
                 window.scrollTo(0, 0);
               }}
               pageCount={Math.ceil(parseInt(results.totalResults) / 10)}
@@ -102,13 +106,13 @@ function App() {
               ))}
             </div>
             <Pager
-              currentPage={page}
+              currentPage={currentPage}
               onPrevious={() => {
-                setPage(page - 1);
+                setCurrentPage(currentPage - 1);
                 window.scrollTo(0, 0);
               }}
               onNext={() => {
-                setPage(page + 1);
+                setCurrentPage(currentPage + 1);
                 window.scrollTo(0, 0);
               }}
               pageCount={Math.ceil(parseInt(results.totalResults) / 10)}

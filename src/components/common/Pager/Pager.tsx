@@ -7,7 +7,6 @@ interface PagerProps {
   pageCount: number;
   onPrevious?: () => void;
   onNext?: () => void;
-  wrapAround?: boolean;
 }
 
 const Pager: React.FC<PagerProps> = ({
@@ -15,7 +14,6 @@ const Pager: React.FC<PagerProps> = ({
   pageCount,
   onNext,
   onPrevious,
-  wrapAround = false,
 }) => {
   return (
     <div className={styles.container}>

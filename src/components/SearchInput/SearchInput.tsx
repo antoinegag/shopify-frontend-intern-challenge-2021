@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "./SearchBox.module.scss";
+import styles from "./SearchInput.module.scss";
 interface SearchBoxProps {
   onQueryChange?: (query: string) => void;
 }

@@ -1,7 +1,4 @@
 import React from "react";
-import IconProps from "./IconProps";
-import classNames from "classnames";
-import styles from "./Icon.module.scss";
 import Icon, { IconT } from "./Icon";
 
 const IconClose: IconT = (props) => {

@@ -1,8 +1,8 @@
 import React from "react";
 import { OMDBMovieSearchResult } from "../../api/OMDBClient";
 import IconClose from "../../icons/IconClose";
+import MoviePoster from "../common/MoviePoster";
 import styles from "./NominatedMovieEntry.module.scss";
-import UnknowPoster from "./UnknownPoster.svg";
 
 interface MovieCardProps extends OMDBMovieSearchResult {
   onRemoveNomination?: (movie: OMDBMovieSearchResult) => void;
@@ -18,16 +18,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
 }) => {
   return (
     <div className={styles.container}>
-      {Poster === "N/A" ? (
-        <div className={styles.unknown_poster}>
-          <img src={UnknowPoster} />
-        </div>
-      ) : (
-        <img
-          src={Poster === "N/A" ? UnknowPoster : Poster}
-          className={styles.poster}
-        />
-      )}
+      <MoviePoster src={Poster} />
       <div className={styles.info}>
         <div>
           <div className={styles.title}>{Title}</div>

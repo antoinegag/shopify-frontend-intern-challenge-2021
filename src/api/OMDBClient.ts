@@ -1,5 +1,3 @@
-import SearchBox from "../components/SearchBox";
-
 const API_KEY = process.env.REACT_APP_OMDB_API_KEY;
 
 export interface OMDBMovieSearchResult {
@@ -20,8 +18,6 @@ interface OMDBSearchResultError {
   Response: "False";
   Error: string;
 }
-
-type OMDBSearchResult = OMDBSearchResultError | OMDBSearchResultSuccess;
 
 export interface OMDBMovieSearchResult {
   Title: string;
@@ -69,7 +65,7 @@ function buildSearchQuery({ title, type, year, page }: SearchParameters) {
   return queryString;
 }
 
-export async function search(params: SearchParameters) {
+export async function searchOMDB(params: SearchParameters) {
   try {
     const res = await fetch(buildSearchQuery(params));
 

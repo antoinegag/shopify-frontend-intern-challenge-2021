@@ -17,7 +17,10 @@ const SearchBlankState = () => {
   return (
     <div className={styles.container}>
       <div className={styles.hint}>{hints[randomHint]}</div>
-      <img src={illustration} />
+      <img
+        src={illustration}
+        alt="Person in the wood looking through binoculars"
+      />
     </div>
   );
 };
