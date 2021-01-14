@@ -13,7 +13,8 @@ import {
 import MovieCard from "./components/MovieCard";
 import NominatedMovieEntry from "./components/NominatedMovieEntry";
 import Pager from "./components/common/Pager";
-import SearchBlankState from "./components/SearchBlankState";
+import SearchBlankState from "./components/SearchState/Blank";
+import SearchNoResultsState from "./components/SearchState/NoResults";
 import NominationBlankState from "./components/NominationsBlankState";
 
 function App() {
@@ -74,10 +75,10 @@ function App() {
     return (
       <>
         <div className={styles.searchbox_container}>
-          <SearchInput onQueryChange={debounce(handleQueryChange, 400)} />
+          <SearchInput onQueryChange={debounce(handleQueryChange, 600)} />
           {query === "" && <SearchBlankState />}
         </div>
-        {results?.Response === "True" && (
+        {results?.Response === "True" ? (
           <div>
             <div className={styles.results}>
               {results.Search.map((movie) => (
@@ -104,6 +105,9 @@ function App() {
               pageCount={Math.ceil(parseInt(results.totalResults) / 10)}
             />
           </div>
+        ) : (
+          query !== "" &&
+          results?.Response === "False" && <SearchNoResultsState />
         )}
       </>
     );

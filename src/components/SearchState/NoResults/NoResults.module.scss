@@ -1,0 +1,15 @@
+@import "src/style/colors";
+
+.container {
+  padding: 1em 0em;
+  img {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+.hint {
+  color: gray;
+  font-style: italic;
+  margin-bottom: 1em;
+}
