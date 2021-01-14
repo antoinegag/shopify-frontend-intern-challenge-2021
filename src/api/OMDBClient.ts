@@ -48,7 +48,7 @@ interface SearchParameters {
 }
 
 function buildSearchQuery({ title, type, year, page }: SearchParameters) {
-  let queryString = `http://omdbapi.com/?apikey=${API_KEY}&s=${title}`;
+  let queryString = `https://omdbapi.com/?apikey=${API_KEY}&s=${title}`;
 
   if (type) {
     queryString += `&type=${type}`;

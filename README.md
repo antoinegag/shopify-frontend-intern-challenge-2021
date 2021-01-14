@@ -42,4 +42,4 @@ Illustrations from [drawkit.io](https://www.drawkit.io/)
 
 Project bootstrapped with [create-react-app](https://github.com/facebook/create-react-app)
 
-Movie data provided by [OMDBAPI](http://www.omdbapi.com/)
+Movie data provided by [OMDBAPI](https://www.omdbapi.com/)

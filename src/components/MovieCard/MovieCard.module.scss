@@ -12,7 +12,7 @@
   justify-content: space-between;
 
   a {
-    text-decoration: wavy underline $yellow;
+    text-decoration: underline $green-dark;
     color: black;
   }
 
@@ -55,7 +55,7 @@
       }
 
       &.nominate {
-        border: 2px solid gold;
+        border: 2px solid $green-dark;
       }
     }
   }

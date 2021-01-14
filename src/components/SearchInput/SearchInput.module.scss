@@ -12,8 +12,8 @@
 }
 
 .searchbar {
-  padding: 10px 10px;
-  border-radius: 4px;
+  padding: 5px 5px;
+  outline: none;
 
   font-size: 1.1em;
 
@@ -29,10 +29,7 @@
     min-width: 400px;
   }
 
-  border: 2px solid $yellow-dark;
-
-  &:focus {
-    outline: none;
-    border: 2px solid $yellow;
-  }
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid $green-dark;
 }

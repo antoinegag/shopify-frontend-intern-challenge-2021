@@ -16,7 +16,7 @@ const SearchBlankState = () => {
   const randomHint = Math.floor(Math.random() * hints.length);
   return (
     <div className={styles.container}>
-      <div className={styles.hint}>{hints[randomHint]}</div>
+      {/* <div className={styles.hint}>{hints[randomHint]}</div> */}
       <img
         src={illustration}
         alt="Person in the wood looking through binoculars"

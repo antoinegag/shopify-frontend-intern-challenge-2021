@@ -18,7 +18,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
 }) => {
   return (
     <div className={styles.container}>
-      <MoviePoster src={Poster} />
+      <MoviePoster src={Poster} size="sm" />
       <div className={styles.info}>
         <div>
           <div className={styles.title}>{Title}</div>

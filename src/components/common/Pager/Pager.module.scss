@@ -8,17 +8,15 @@
 
   button {
     background-color: white;
-    border: 2px solid $yellow;
+    border: 2px solid $green-dark;
     border-radius: 5px;
     padding: 0.5em 1.5em;
     font-weight: bold;
-    color: $green-dark;
     cursor: pointer;
     outline: none;
 
     &:hover {
-      background-color: $yellow;
-      color: white;
+      background-color: $sky-light;
 
       &:disabled {
         background-color: white;

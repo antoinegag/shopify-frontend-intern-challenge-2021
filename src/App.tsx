@@ -76,24 +76,10 @@ function App() {
         <div className={styles.searchbox_container}>
           <SearchInput onQueryChange={debounce(handleQueryChange, 400)} />
           {query === "" && <SearchBlankState />}
-          {results?.Response === "True" && (
-            <Pager
-              currentPage={currentPage}
-              onPrevious={() => {
-                setCurrentPage(currentPage - 1);
-                window.scrollTo(0, 0);
-              }}
-              onNext={() => {
-                setCurrentPage(currentPage + 1);
-                window.scrollTo(0, 0);
-              }}
-              pageCount={Math.ceil(parseInt(results.totalResults) / 10)}
-            />
-          )}
         </div>
         {results?.Response === "True" && (
           <div>
-            <div>
+            <div className={styles.results}>
               {results.Search.map((movie) => (
                 <MovieCard
                   {...movie}
@@ -130,16 +116,18 @@ function App() {
         <main>{nominated.length < 5 ? renderSearch() : <DoneNotice />}</main>
         <aside>
           <h1>Nominations</h1>
-          {nominated.length > 0 ? (
-            nominated.map((movie) => (
-              <NominatedMovieEntry
-                {...movie}
-                onRemoveNomination={handleRemoveNomination}
-              />
-            ))
-          ) : (
-            <NominationBlankState />
-          )}
+          <div className={styles.nominated}>
+            {nominated.length > 0 ? (
+              nominated.map((movie) => (
+                <NominatedMovieEntry
+                  {...movie}
+                  onRemoveNomination={handleRemoveNomination}
+                />
+              ))
+            ) : (
+              <NominationBlankState />
+            )}
+          </div>
         </aside>
       </div>
     </div>
