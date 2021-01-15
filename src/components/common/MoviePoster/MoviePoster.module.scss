@@ -11,10 +11,18 @@
 .unknown_poster {
   &.medium {
     height: 150px;
+
+    img {
+      height: 60px;
+    }
   }
 
   &.small {
     height: 75px;
+
+    img {
+      height: 24px;
+    }
   }
 
   background-color: gray;
@@ -22,8 +30,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  img {
-    height: 60px;
-  }
 }
