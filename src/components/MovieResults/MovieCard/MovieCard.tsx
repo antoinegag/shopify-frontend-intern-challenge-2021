@@ -1,8 +1,8 @@
 import React from "react";
-import { OMDBMovieSearchResult } from "../../api/OMDBClient";
-import IconClose from "../../icons/IconClose";
+import { OMDBMovieSearchResult } from "../../../api/OMDBClient";
+import IconClose from "../../../icons/IconClose";
 import styles from "./MovieCard.module.scss";
-import MoviePoster from "../common/MoviePoster/MoviePoster";
+import MoviePoster from "../../common/MoviePoster/MoviePoster";
 
 interface MovieCardProps extends OMDBMovieSearchResult {
   nominated?: boolean;

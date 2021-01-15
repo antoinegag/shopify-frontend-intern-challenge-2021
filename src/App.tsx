@@ -10,18 +10,20 @@ import {
   searchOMDB,
   SearchResult,
 } from "./api/OMDBClient";
-import MovieCard from "./components/MovieCard";
 import NominatedMovieEntry from "./components/NominatedMovieEntry";
 import Pager from "./components/common/Pager";
 import SearchBlankState from "./components/SearchState/Blank";
 import SearchNoResultsState from "./components/SearchState/NoResults";
 import NominationBlankState from "./components/NominationsBlankState";
+import MovieResults from "./components/MovieResults";
+import SearchError from "./components/SearchState/SearchError";
 
 function App() {
   const [results, setResults] = useState<SearchResult | undefined>();
   const [nominated, setNominated] = useState<OMDBMovieSearchResult[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [query, setQuery] = useState("");
+  const [error, setError] = useState<Error>();
 
   useEffect(() => {
     async function searchMovies() {
@@ -33,7 +35,9 @@ function App() {
         });
 
         setResults(searchResults);
-      } catch (error) {}
+      } catch (error) {
+        setError(error);
+      }
     }
 
     searchMovies();
@@ -42,6 +46,7 @@ function App() {
   const handleQueryChange = async (query: string) => {
     setCurrentPage(1);
     setQuery(query);
+    setError(undefined);
   };
 
   const handleNominate = (movie: OMDBMovieSearchResult) => {
@@ -71,53 +76,49 @@ function App() {
     }
   };
 
-  const renderSearch = () => {
-    return (
-      <>
-        <div className={styles.searchbox_container}>
-          <SearchInput onQueryChange={debounce(handleQueryChange, 600)} />
-          {query === "" && <SearchBlankState />}
-        </div>
-        {results?.Response === "True" ? (
-          <div>
-            <div className={styles.results}>
-              {results.Search.map((movie) => (
-                <MovieCard
-                  {...movie}
-                  onNominate={handleNominate}
-                  onRemoveNomination={handleRemoveNomination}
-                  nominated={
-                    nominated.findIndex((m) => m.imdbID === movie.imdbID) !== -1
-                  }
-                />
-              ))}
-            </div>
-            <Pager
-              currentPage={currentPage}
-              onPrevious={() => {
-                setCurrentPage(currentPage - 1);
-                window.scrollTo(0, 0);
-              }}
-              onNext={() => {
-                setCurrentPage(currentPage + 1);
-                window.scrollTo(0, 0);
-              }}
-              pageCount={Math.ceil(parseInt(results.totalResults) / 10)}
-            />
-          </div>
-        ) : (
-          query !== "" &&
-          results?.Response === "False" && <SearchNoResultsState />
-        )}
-      </>
-    );
-  };
-
   return (
     <div>
       <Header />
       <div className={styles.body}>
-        <main>{nominated.length < 5 ? renderSearch() : <DoneNotice />}</main>
+        <main>
+          {nominated.length < 5 ? (
+            <>
+              <div className={styles.searchbox_container}>
+                <SearchInput onQueryChange={debounce(handleQueryChange, 600)} />
+                {query === "" && <SearchBlankState />}
+              </div>
+              {error && <SearchError error={error} />}
+              {results?.Response === "True" ? (
+                <>
+                  <MovieResults
+                    results={results.Search}
+                    onNominate={handleNominate}
+                    onRemoveNomination={handleRemoveNomination}
+                    nominated={nominated}
+                  />
+                  <Pager
+                    currentPage={currentPage}
+                    onPrevious={() => {
+                      setCurrentPage(currentPage - 1);
+                      window.scrollTo(0, 0);
+                    }}
+                    onNext={() => {
+                      setCurrentPage(currentPage + 1);
+                      window.scrollTo(0, 0);
+                    }}
+                    pageCount={Math.ceil(parseInt(results.totalResults) / 10)}
+                  />
+                </>
+              ) : (
+                !error &&
+                query !== "" &&
+                results?.Response === "False" && <SearchNoResultsState />
+              )}
+            </>
+          ) : (
+            <DoneNotice />
+          )}
+        </main>
         <aside>
           <h1>Nominations</h1>
           {nominated.length > 0 ? (

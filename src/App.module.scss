@@ -26,13 +26,6 @@
 main {
   flex: 70%;
   margin-top: 1em;
-
-  .results {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 1rem;
-    gap: 1rem;
-  }
 }
 
 .searchbox_container {

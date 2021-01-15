@@ -8,13 +8,13 @@ export interface OMDBMovieSearchResult {
   Poster: string;
 }
 
-interface OMDBSearchResultSuccess {
+export interface OMDBSearchResultSuccess {
   Search: OMDBMovieSearchResult[];
   totalResults: string;
   Response: "True";
 }
 
-interface OMDBSearchResultError {
+export interface OMDBSearchResultError {
   Response: "False";
   Error: string;
 }
@@ -27,13 +27,13 @@ export interface OMDBMovieSearchResult {
   Poster: string;
 }
 
-interface OMDBSearchResultSuccess {
+export interface OMDBSearchResultSuccess {
   Search: OMDBMovieSearchResult[];
   totalResults: string;
   Response: "True";
 }
 
-interface OMDBSearchResultError {
+export interface OMDBSearchResultError {
   Response: "False";
   Error: string;
 }
