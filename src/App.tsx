@@ -120,18 +120,18 @@ function App() {
         <main>{nominated.length < 5 ? renderSearch() : <DoneNotice />}</main>
         <aside>
           <h1>Nominations</h1>
-          <div className={styles.nominated}>
-            {nominated.length > 0 ? (
-              nominated.map((movie) => (
+          {nominated.length > 0 ? (
+            <div className={styles.nominated}>
+              {nominated.map((movie) => (
                 <NominatedMovieEntry
                   {...movie}
                   onRemoveNomination={handleRemoveNomination}
                 />
-              ))
-            ) : (
-              <NominationBlankState />
-            )}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <NominationBlankState />
+          )}
         </aside>
       </div>
     </div>

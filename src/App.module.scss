@@ -25,6 +25,7 @@
 
 main {
   flex: 70%;
+  margin-top: 1em;
 
   .results {
     display: grid;
@@ -47,7 +48,7 @@ aside {
   top: 0;
   align-self: start;
   flex: 30%;
-  padding: 1em 1em;
+  padding: 0em 0em 0em 2em;
   margin-top: 1em;
 
   .nominated {
