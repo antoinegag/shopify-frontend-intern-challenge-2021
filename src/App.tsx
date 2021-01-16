@@ -66,6 +66,10 @@ function App() {
 
     const newNominated = [...nominated, movie];
     setNominated(newNominated);
+
+    if (newNominated.length === MAX_NOMINEES) {
+      window.scrollTo(0, 0);
+    }
   };
 
   const handleRemoveNomination = (movie: OMDBMovieSearchResult) => {
