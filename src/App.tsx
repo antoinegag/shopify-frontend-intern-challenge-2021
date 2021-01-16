@@ -18,6 +18,8 @@ import NominationBlankState from "./components/NominationsBlankState";
 import MovieResults from "./components/MovieResults";
 import SearchError from "./components/SearchState/SearchError";
 
+const MAX_NOMINEES = 5;
+
 function App() {
   const [results, setResults] = useState<SearchResult | undefined>();
   const [nominated, setNominated] = useState<OMDBMovieSearchResult[]>([]);
@@ -43,7 +45,7 @@ function App() {
     searchMovies();
   }, [query, currentPage]);
 
-  const handleQueryChange = async (query: string) => {
+  const handleQueryChange = (query: string) => {
     setCurrentPage(1);
     setQuery(query);
     setError(undefined);
@@ -51,29 +53,28 @@ function App() {
 
   const handleNominate = (movie: OMDBMovieSearchResult) => {
     if (
-      nominated.length >= 5 || // Finished
-      nominated.find((m) => m.imdbID === movie.imdbID) // Already nominated
+      nominated.length >= MAX_NOMINEES ||
+      nominated.find((m) => m.imdbID === movie.imdbID)
     ) {
       return;
     }
 
     const newNominated = [...nominated, movie];
     setNominated(newNominated);
-
-    if (newNominated.length === 5) {
-      setQuery("");
-      setResults(undefined);
-    }
   };
 
   const handleRemoveNomination = (movie: OMDBMovieSearchResult) => {
-    const index = nominated.findIndex((m) => m.imdbID === movie.imdbID);
+    setNominated((nominated) => {
+      const index = nominated.findIndex((m) => m.imdbID === movie.imdbID);
 
-    if (index !== -1) {
-      let updated = [...nominated];
-      updated.splice(index, 1);
-      setNominated(updated);
-    }
+      if (index !== -1) {
+        let updated = [...nominated];
+        updated.splice(index, 1);
+        return updated;
+      }
+
+      return nominated;
+    });
   };
 
   return (
@@ -81,7 +82,7 @@ function App() {
       <Header />
       <div className={styles.body}>
         <main>
-          {nominated.length < 5 ? (
+          {nominated.length < MAX_NOMINEES ? (
             <>
               <div className={styles.searchbox_container}>
                 <SearchInput onQueryChange={debounce(handleQueryChange, 600)} />
