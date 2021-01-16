@@ -1,4 +1,4 @@
-const API_KEY = process.env.REACT_APP_OMDB_API_KEY;
+const API_KEY = process.env.REACT_APP_OMDB_API_KEY || "";
 
 export interface OMDBMovieSearchResult {
   Title: string;
@@ -28,22 +28,27 @@ interface SearchParameters {
   page?: number; // p
 }
 
+const BASE_API_URL = "https://omdbapi.com";
+
 function buildSearchQuery({ title, type, year, page }: SearchParameters) {
-  let queryString = `https://omdbapi.com/?apikey=${API_KEY}&s=${title}`;
+  const url = new URL(BASE_API_URL);
+
+  url.searchParams.set("apikey", API_KEY);
+  url.searchParams.set("s", title);
 
   if (type) {
-    queryString += `&type=${type}`;
+    url.searchParams.set("type", type);
   }
 
   if (year) {
-    queryString += `&y=${year}`;
+    url.searchParams.set("y", year.toString());
   }
 
   if (page) {
-    queryString += `&page=${page}`;
+    url.searchParams.set("page", page.toString());
   }
 
-  return queryString;
+  return url.toString();
 }
 
 export async function searchOMDB(params: SearchParameters) {
