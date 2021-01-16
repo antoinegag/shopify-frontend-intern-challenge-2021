@@ -8,34 +8,15 @@ export interface OMDBMovieSearchResult {
   Poster: string;
 }
 
-export interface OMDBSearchResultSuccess {
-  Search: OMDBMovieSearchResult[];
-  totalResults: string;
-  Response: "True";
-}
-
 export interface OMDBSearchResultError {
   Response: "False";
   Error: string;
-}
-
-export interface OMDBMovieSearchResult {
-  Title: string;
-  Year: string;
-  imdbID: string;
-  Type: string;
-  Poster: string;
 }
 
 export interface OMDBSearchResultSuccess {
   Search: OMDBMovieSearchResult[];
   totalResults: string;
   Response: "True";
-}
-
-export interface OMDBSearchResultError {
-  Response: "False";
-  Error: string;
 }
 
 export type SearchResult = OMDBSearchResultError | OMDBSearchResultSuccess;
