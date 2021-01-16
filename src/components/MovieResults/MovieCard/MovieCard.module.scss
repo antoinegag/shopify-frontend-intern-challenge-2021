@@ -57,6 +57,13 @@
       &.nominate {
         border: 2px solid $green-dark;
       }
+
+      &:disabled {
+        background-color: $sky-light;
+        color: gray;
+        border-color: gray;
+        cursor: default;
+      }
     }
   }
 }

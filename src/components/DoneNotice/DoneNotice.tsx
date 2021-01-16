@@ -12,8 +12,8 @@ const DoneNotice: React.FC = () => {
           However... if you want to modify your list, you'll have to remove some
           entries.
         </div>
-        <img src={done} alt="Person holding a pen next to a binder" />
       </div>
+      <img src={done} alt="Person holding a pen next to a binder" />
     </div>
   );
 };

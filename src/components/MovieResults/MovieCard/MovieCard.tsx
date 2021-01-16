@@ -45,10 +45,11 @@ const MovieCard: React.FC<MovieCardProps> = ({
                 )}
               </div>
             )}
-            {!nominated && onNominate && (
+            {!nominated && (
               <button
                 className={styles.nominate}
-                onClick={() => onNominate(movie)}
+                onClick={() => onNominate?.(movie)}
+                disabled={onNominate === undefined}
               >
                 Nominate
               </button>

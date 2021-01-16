@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
+import {
+  OMDBMovieSearchResult,
+  searchOMDB,
+  SearchResult,
+} from "./api/OMDBClient";
 import Header from "./components/Header";
 import SearchInput from "./components/SearchInput";
 import debounce from "lodash.debounce";
 import "./style/common.scss";
 import styles from "./App.module.scss";
 import DoneNotice from "./components/DoneNotice/DoneNotice";
-import {
-  OMDBMovieSearchResult,
-  searchOMDB,
-  SearchResult,
-} from "./api/OMDBClient";
 import NominatedMovieEntry from "./components/NominatedMovieEntry";
 import Pager from "./components/common/Pager";
 import SearchBlankState from "./components/SearchState/Blank";
@@ -26,9 +26,12 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [query, setQuery] = useState("");
   const [error, setError] = useState<Error>();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function searchMovies() {
+      setLoading(true);
+
       try {
         const searchResults = await searchOMDB({
           title: query,
@@ -40,6 +43,8 @@ function App() {
       } catch (error) {
         setError(error);
       }
+
+      setLoading(false);
     }
 
     searchMovies();
@@ -77,47 +82,50 @@ function App() {
     });
   };
 
+  const hasMaxNominees = nominated.length >= MAX_NOMINEES;
+  const blankStateMarkup = query === "" ? <SearchBlankState /> : null;
+  const errorStateMarkup = error ? <SearchError error={error} /> : null;
+  const doneStateMarkup = hasMaxNominees ? <DoneNotice /> : null;
+
+  const noResultStateMarkup = !error &&
+    !loading &&
+    query !== "" &&
+    results?.Response === "False" && <SearchNoResultsState />;
+
   return (
     <div>
       <Header />
       <div className={styles.body}>
         <main>
-          {nominated.length < MAX_NOMINEES ? (
+          {doneStateMarkup}
+          <div className={styles.searchbox_container}>
+            <SearchInput onQueryChange={debounce(handleQueryChange, 600)} />
+            {blankStateMarkup}
+          </div>
+          {errorStateMarkup}
+          {results?.Response === "True" ? (
             <>
-              <div className={styles.searchbox_container}>
-                <SearchInput onQueryChange={debounce(handleQueryChange, 600)} />
-                {query === "" && <SearchBlankState />}
-              </div>
-              {error && <SearchError error={error} />}
-              {results?.Response === "True" ? (
-                <>
-                  <MovieResults
-                    results={results.Search}
-                    onNominate={handleNominate}
-                    onRemoveNomination={handleRemoveNomination}
-                    nominated={nominated}
-                  />
-                  <Pager
-                    currentPage={currentPage}
-                    onPrevious={() => {
-                      setCurrentPage(currentPage - 1);
-                      window.scrollTo(0, 0);
-                    }}
-                    onNext={() => {
-                      setCurrentPage(currentPage + 1);
-                      window.scrollTo(0, 0);
-                    }}
-                    pageCount={Math.ceil(parseInt(results.totalResults) / 10)}
-                  />
-                </>
-              ) : (
-                !error &&
-                query !== "" &&
-                results?.Response === "False" && <SearchNoResultsState />
-              )}
+              <MovieResults
+                results={results.Search}
+                onNominate={hasMaxNominees ? undefined : handleNominate}
+                onRemoveNomination={handleRemoveNomination}
+                nominated={nominated}
+              />
+              <Pager
+                currentPage={currentPage}
+                onPrevious={() => {
+                  setCurrentPage(currentPage - 1);
+                  window.scrollTo(0, 0);
+                }}
+                onNext={() => {
+                  setCurrentPage(currentPage + 1);
+                  window.scrollTo(0, 0);
+                }}
+                pageCount={Math.ceil(parseInt(results.totalResults) / 10)}
+              />
             </>
           ) : (
-            <DoneNotice />
+            noResultStateMarkup
           )}
         </main>
         <aside>
