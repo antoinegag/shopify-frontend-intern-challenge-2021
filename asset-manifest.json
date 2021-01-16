@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/shopify-frontend-intern-challenge-2021/static/css/main.0f792dd3.chunk.css",
-    "main.js": "/shopify-frontend-intern-challenge-2021/static/js/main.7f4018b8.chunk.js",
-    "main.js.map": "/shopify-frontend-intern-challenge-2021/static/js/main.7f4018b8.chunk.js.map",
+    "main.css": "/shopify-frontend-intern-challenge-2021/static/css/main.f06a2f79.chunk.css",
+    "main.js": "/shopify-frontend-intern-challenge-2021/static/js/main.52836cf9.chunk.js",
+    "main.js.map": "/shopify-frontend-intern-challenge-2021/static/js/main.52836cf9.chunk.js.map",
     "runtime-main.js": "/shopify-frontend-intern-challenge-2021/static/js/runtime-main.dcaa0819.js",
     "runtime-main.js.map": "/shopify-frontend-intern-challenge-2021/static/js/runtime-main.dcaa0819.js.map",
-    "static/js/2.b2af7fd3.chunk.js": "/shopify-frontend-intern-challenge-2021/static/js/2.b2af7fd3.chunk.js",
-    "static/js/2.b2af7fd3.chunk.js.map": "/shopify-frontend-intern-challenge-2021/static/js/2.b2af7fd3.chunk.js.map",
+    "static/js/2.7cb09e4b.chunk.js": "/shopify-frontend-intern-challenge-2021/static/js/2.7cb09e4b.chunk.js",
+    "static/js/2.7cb09e4b.chunk.js.map": "/shopify-frontend-intern-challenge-2021/static/js/2.7cb09e4b.chunk.js.map",
     "static/js/3.cc15111e.chunk.js": "/shopify-frontend-intern-challenge-2021/static/js/3.cc15111e.chunk.js",
     "static/js/3.cc15111e.chunk.js.map": "/shopify-frontend-intern-challenge-2021/static/js/3.cc15111e.chunk.js.map",
     "index.html": "/shopify-frontend-intern-challenge-2021/index.html",
-    "static/css/main.0f792dd3.chunk.css.map": "/shopify-frontend-intern-challenge-2021/static/css/main.0f792dd3.chunk.css.map",
-    "static/js/2.b2af7fd3.chunk.js.LICENSE.txt": "/shopify-frontend-intern-challenge-2021/static/js/2.b2af7fd3.chunk.js.LICENSE.txt",
+    "static/css/main.f06a2f79.chunk.css.map": "/shopify-frontend-intern-challenge-2021/static/css/main.f06a2f79.chunk.css.map",
+    "static/js/2.7cb09e4b.chunk.js.LICENSE.txt": "/shopify-frontend-intern-challenge-2021/static/js/2.7cb09e4b.chunk.js.LICENSE.txt",
     "static/media/UnknownPoster.9d7f9c29.svg": "/shopify-frontend-intern-challenge-2021/static/media/UnknownPoster.9d7f9c29.svg",
     "static/media/done.597d11c2.svg": "/shopify-frontend-intern-challenge-2021/static/media/done.597d11c2.svg",
     "static/media/error.d795627e.svg": "/shopify-frontend-intern-challenge-2021/static/media/error.d795627e.svg",
@@ -21,8 +21,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.dcaa0819.js",
-    "static/js/2.b2af7fd3.chunk.js",
-    "static/css/main.0f792dd3.chunk.css",
-    "static/js/main.7f4018b8.chunk.js"
+    "static/js/2.7cb09e4b.chunk.js",
+    "static/css/main.f06a2f79.chunk.css",
+    "static/js/main.52836cf9.chunk.js"
   ]
 }
