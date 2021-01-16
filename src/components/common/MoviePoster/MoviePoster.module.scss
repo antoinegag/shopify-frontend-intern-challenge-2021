@@ -9,6 +9,11 @@
 }
 
 .unknown_poster {
+  background-color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   &.medium {
     height: 150px;
 
@@ -24,10 +29,4 @@
       height: 24px;
     }
   }
-
-  background-color: gray;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
