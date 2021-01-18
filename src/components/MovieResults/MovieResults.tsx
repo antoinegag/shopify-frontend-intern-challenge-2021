@@ -18,17 +18,20 @@ const MovieResults: React.FC<MovieResultsListProps> = ({
 }) => {
   return (
     <div className={styles.results}>
-      {results.map((movie) => (
-        <MovieCard
-          {...movie}
-          onNominate={onNominate}
-          onRemoveNomination={onRemoveNomination}
-          nominated={
-            nominated &&
-            nominated.findIndex((m) => m.imdbID === movie.imdbID) !== -1
-          }
-        />
-      ))}
+      {results.map((movie) => {
+        const isNominated =
+          nominated &&
+          nominated.findIndex((m) => m.imdbID === movie.imdbID) !== -1;
+        return (
+          <MovieCard
+            {...movie}
+            onNominate={onNominate}
+            onRemoveNomination={onRemoveNomination}
+            key={`${movie.imdbID}-${isNominated}`}
+            nominated={isNominated}
+          />
+        );
+      })}
     </div>
   );
 };

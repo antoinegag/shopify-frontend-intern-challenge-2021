@@ -139,6 +139,7 @@ function App() {
               {nominated.map((movie) => (
                 <NominatedMovieEntry
                   {...movie}
+                  key={movie.imdbID}
                   onRemoveNomination={handleRemoveNomination}
                 />
               ))}

@@ -57,7 +57,11 @@ const MovieCard: React.FC<MovieCardProps> = ({
           </div>
         </div>
         <div>
-          <a href={`https://www.imdb.com/title/${imdbID}/`} target="_blank">
+          <a
+            href={`https://www.imdb.com/title/${imdbID}/`}
+            target="_blank"
+            rel="noreferrer"
+          >
             IMDB
           </a>
         </div>

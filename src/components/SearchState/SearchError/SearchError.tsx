@@ -1,5 +1,4 @@
 import React from "react";
-import classNames from "classnames";
 import styles from "./Error.module.scss";
 import illustration from "./error.svg";
 
